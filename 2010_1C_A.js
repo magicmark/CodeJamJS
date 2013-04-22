@@ -24,13 +24,13 @@ fs.readFile(inputFile, 'utf8', function (err,data) {
 
       ct += c;
       intersections = 0;
-      // take a wire, and through every other wire and see if they
-      // "intersect" using the following mathematical definition thereof
+      // take a wire, and go through every other wire and see if they "intersect".
+      // see previous version of this file to see line 33 rewritten, to understand
+      // the definition. this way is more efficient. 
       wires.forEach(function (wireA) {
          wires.forEach(function (wireB) {
             if (wireA == wireB) return;
-            if ( ((wireA[0] > wireB[0]) && (wireA[1] < wireB[1])) ||
-                 ((wireA[0] < wireB[0]) && (wireA[1] > wireB[1])) )
+            if ( ((wireA[0] - wireB[0]) * (wireA[1] - wireB[1])) < 0)
                intersections++;
          });
       });
